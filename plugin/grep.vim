@@ -9,8 +9,8 @@ if !exists("g:grep_default_options")
     let g:grep_default_options = "--with-filename --line-number"
 endif
 
-if filereadable($PWD . "/VERSION")
-  let g:grep_plugin_version = readfile($PWD . "/VERSION")[0]
+if filereadable(expand('<sfile>:p:h:h') . "/VERSION")
+  let g:grep_plugin_version = readfile(expand('<sfile>:p:h:h') . "/VERSION")[0]
 endif
 
 if !exists("g:grep_default_bin")
