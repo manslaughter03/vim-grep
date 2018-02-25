@@ -1,50 +1,63 @@
 *grep.txt*  Grep plugin
 
-       ██╗jjj██╗██╗███╗jjj███╗jjjjjjj██████╗j██████╗j███████╗██████╗j
-       ██║jjj██║██║████╗j████║jjjjjj██╔════╝j██╔══██╗██╔════╝██╔══██╗
-       ██║jjj██║██║██╔████╔██║█████╗██║jj███╗██████╔╝█████╗jj██████╔╝
-       ╚██╗j██╔╝██║██║╚██╔╝██║╚════╝██║jjj██║██╔══██╗██╔══╝jj██╔═══╝j
-       j╚████╔╝j██║██║j╚═╝j██║jjjjjj╚██████╔╝██║jj██║███████╗██║jjjjj
-       jj╚═══╝jj╚═╝╚═╝jjjjj╚═╝jjjjjjj╚═════╝j╚═╝jj╚═╝╚══════╝╚═╝jjjjj
-       jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-    
-                              Reference Manual~
+                 ██╗jjj██╗██╗███╗jjj███╗jjjjjjj██████╗j██████╗j███████╗██████╗j
+                 ██║jjj██║██║████╗j████║jjjjjj██╔════╝j██╔══██╗██╔════╝██╔══██╗
+                 ██║jjj██║██║██╔████╔██║█████╗██║jj███╗██████╔╝█████╗jj██████╔╝
+                 ╚██╗j██╔╝██║██║╚██╔╝██║╚════╝██║jjj██║██╔══██╗██╔══╝jj██╔═══╝j
+                 j╚████╔╝j██║██║j╚═╝j██║jjjjjj╚██████╔╝██║jj██║███████╗██║jjjjj
+                 jj╚═══╝jj╚═╝╚═╝jjjjj╚═╝jjjjjjj╚═════╝j╚═╝jj╚═╝╚══════╝╚═╝jjjjj
+                 jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
-==============================================================================
-CONTENTS                                                       *Grep-contents*
+                                        Reference Manual~
+
+=================================================================================================
+CONTENTS                                                                          *Grep-contents*
 
     1.Intro.................................|Grep|
     2.Functionality provided................|GrepFunctionality|
         2.1 Global commands.................|GrepGlobalCommands|
     3.Options...............................|GrepOptions|
 
-==============================================================================
-1. Intro                                                                *Grep*
+=================================================================================================
+1. Intro                                                                                   *Grep*
 
-The Grep plugin allow to make grep (recursive or not) in async task and open
-the quickfix window.
+The Grep plugin allow to make grep (recursive or not) in async task and open the quickfix 
+window.
 
-==============================================================================
-2. Functionality provided                                  *GrepFunctionality*
+=================================================================================================
+2. Functionality provided                                                     *GrepFunctionality*
 
-------------------------------------------------------------------------------
-2.1. Global Commands                                      *GrepGlobalCommands*
+------------------------------------------------------------------------------------------------
+2.1. Global Commands                                                         *GrepGlobalCommands*
 
-:Grep <pattern> [<filename>]                                           *:Grep*
+:Grep <pattern> [<filename>]                                                              *:Grep*
   Run grep in async job. If no <filename> define we use the current file.
 
-:Rgrep <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>]
+:Rgrep <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>]       *:Rgrep*
   Run recursive grep in async job. If no <directory> are given then the $PWD is use.
   The default <file_pattern> is '*'. <exclude_path> and <include_path> must be the
   list of pattern split by ','.
 
-:GrepAdd <pattern> [<filename>]                                     *:GrepAdd*
+:GrepAdd <pattern> [<filename>]                                                        *:GrepAdd*
   Like :Grep command without clean quickfix list.
 
-:RgrepAdd <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>]
+:RgrepAdd <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>] *:RgrepAdd*
   Like :Rgrep command without clean quickfix list.
 
-:GrepBuffer <pattern>
+:GrepBuffer <pattern>                                                               *:GrepBuffer*
   Run grep command foreach opened buffer.
 
+:GrepBufferAdd <pattern>                                                         *:GrepBufferAdd*
+  Run grep command foreach opened buffer without clean quickfix list.
 
+:Bgrep <pattern>                                                                         *:Bgrep*
+  Same as :GrepBuffer.
+
+:BgrepAdd <pattern>                                                                   *:BgrepAdd*
+  Same as :GrepBufferAdd.
+
+:GrepPrompt                                                                         *:GrepPrompt*
+  Same as :Grep and prompt arguments before running grep command.
+
+:RgrepPrompt                                                                       *:RgrepPrompt*
+  Same as :Rgrep and prompt arguments before running a recursive grep command.

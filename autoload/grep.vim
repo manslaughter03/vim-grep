@@ -11,7 +11,7 @@ endif
 let g:loaded_grep_autoload = 1
 
 function! grep#version()
-    return '0.0.1'
+    return g:grep_plugin_version
 endfunction
 
 function! grep#run_prompt_args()
@@ -20,6 +20,15 @@ function! grep#run_prompt_args()
   let l:filename = input("Enter filename: ", expand("%:p"))
   
   call grep#run(l:pattern)
+
+endfunction
+
+function! grep#run_recursive_prompt_args()
+
+  let l:pattern = input("Enter pattern: ")
+  let l:directory = input("Enter directory: ", $PWD)
+  
+  call grep#run_recursive(l:pattern, l:directory)
 
 endfunction
 

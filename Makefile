@@ -2,7 +2,7 @@ IMAGE_NAME=$(shell basename $(PWD))
 TAG=$(shell cat VERSION)
 NAMESPACE=$(USER)
 
-.PHONY: build run release install
+.PHONY: build run release install clean
 
 default: build
 
@@ -17,3 +17,7 @@ run:
 release:
 	@echo INFO Release source archive
 	@tar -cvf $(IMAGE_NAME).tar.gz .
+
+clean:
+	@echo INFO Clean archive
+	rm $(IMAGE_NAME).tar.gz

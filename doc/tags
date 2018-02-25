@@ -1,0 +1,15 @@
+:Bgrep	grep.txt	/*:Bgrep*
+:BgrepAdd	grep.txt	/*:BgrepAdd*
+:Grep	grep.txt	/*:Grep*
+:GrepAdd	grep.txt	/*:GrepAdd*
+:GrepBuffer	grep.txt	/*:GrepBuffer*
+:GrepBufferAdd	grep.txt	/*:GrepBufferAdd*
+:GrepPrompt	grep.txt	/*:GrepPrompt*
+:Rgrep	grep.txt	/*:Rgrep*
+:RgrepAdd	grep.txt	/*:RgrepAdd*
+:RgrepPrompt	grep.txt	/*:RgrepPrompt*
+Grep	grep.txt	/*Grep*
+Grep-contents	grep.txt	/*Grep-contents*
+GrepFunctionality	grep.txt	/*GrepFunctionality*
+GrepGlobalCommands	grep.txt	/*GrepGlobalCommands*
+grep.txt	grep.txt	/*grep.txt*

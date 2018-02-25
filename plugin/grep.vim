@@ -9,6 +9,10 @@ if !exists("g:grep_default_options")
     let g:grep_default_options = "--with-filename --line-number"
 endif
 
+if filereadable($PWD . "/VERSION")
+  let g:grep_plugin_version = readfile($PWD . "/VERSION")[0]
+endif
+
 if !exists("g:grep_default_bin")
     if executable("grep")
         let g:grep_default_bin = "grep"
@@ -45,3 +49,6 @@ command! -nargs=1 BgrepAdd
 
 command! -complete=file GrepPrompt
       \ call setqflist([]) | call grep#run_prompt_args()
+
+command! -complete=file RgrepPrompt
+      \ call setqflist([]) | call grep#run_recursive_prompt_args()
