@@ -1,7 +1,7 @@
 services:
   - docker:dind
 
-variales:
+variables:
   IMAGE_TAG: registry.pandajs.com:5000/$CI_COMMIT_REF_NAME
 
 build:
