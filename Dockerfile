@@ -1,3 +1,3 @@
-FROM registry.pandajs.com:5000/banks/vim
+FROM haroun/vim
 
-ADD . $HOME/.vim/pack/plugins/start/vim-grep
+ADD . /home/dev/.vim/pack/plugins/start/vim-grep
