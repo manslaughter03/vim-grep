@@ -7,5 +7,5 @@ variales:
 build:
   stage: build
   script:
-    - docker build -t IMAGE_TAG .
+    - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
