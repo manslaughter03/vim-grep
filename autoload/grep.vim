@@ -111,83 +111,26 @@ function! grep#run_async_job(pattern, cmd)
   let l:cmd      = a:cmd
 "  echo "cmd: " . l:cmd
 
+  exec "silent! cadde \"Search pattern: " . a:pattern . "\""
+
   " generate buffer name
-  let s:buffer_name = system("head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''")
-  let s:err_bufname = system("head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''")
   let l:job_options = {
-        \ "out_io": "buffer",
-        \ "out_name": s:buffer_name,
-        \ "err_io": "buffer",
-        \ "err_name": s:err_bufname,
+        \ "out_cb": "HandleOut",
         \ "exit_cb": "HandleExit",
         \ }
 
+  " Output callback
+  func! HandleOut(channel, message)
+    exec "silent! cadde a:message"
+    cwindow
+  endfunc
 
   " Exit Callback
   func! HandleExit(job, exit_status)
-"    echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
-
-    exec "silent! caddbuffer " . bufnr(s:buffer_name)
-    exec "silent! caddbuffer " . bufnr(s:err_bufname)
-   
-    cwindow
+    echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
   endfunc
 
   " Exec job
   let l:job = job_start(l:cmd, l:job_options)
 
 endfunction
-
-""    let l:gitignore = []
-""    if filereadable(l:directory . "/.gitignore")
-""      let l:gitignore = filter(readfile(l:directory . "/.gitignore"), 'v:val !~ "^#"')
-""    elseif filereadable($HOME . "/.gitignore")
-""      let l:gitignore = filter(readfile($HOME . "/.gitignore"), 'v:val !~ "^#"')
-""    endif
-""    if len(l:gitignore) > 1
-""      if has_key(l:options, "exlcude_path") && len(l:options["exclude_path"])
-""        let l:options["exclude_path"] += l:gitignore
-""      else
-""        let l:options["exclude_path"] = l:gitignore
-""      endif
-""    endif
-
-"" function! grep#run_async_job(pattern, ...)
-"" 
-""   let s:pattern = a:pattern
-""   let l:options = a:0 > 0 ? a:1 : {}
-"" 
-""   let l:cmd = grep#generate_cmd(s:pattern, l:options)
-""   echo "l:cmd : " . l:cmd
-""   let s:tempfile = tempname()
-""   let l:cmd = "find . -type f | xargs grep -InH job"
-"" 
-""   let l:job_options = {
-""         \ "out_io": "file",
-""         \ "out_name": s:tempfile,
-""         \ "exit_cb": "HandleExit",
-""         \ "err_cb": "HandleError",
-""         \ }
-""   let l:job = job_start(l:cmd, l:job_options)
-""   func! HandleError(channel, message)
-""     echo "channel: " . a:channel . " - message : " . a:message
-""   endfunc
-""   func! HandleExit(job, exit_status)
-""     echo "job: " . a:job . " - exit_status: " . a:exit_status . " - tempfile : " . s:tempfile
-""     ""call setqflist([])
-""     ""if v:version >= 700
-""     ""  execute "silent! caddfile " . s:tempfile
-""     ""else
-""     "if exists(":cgetfile")
-""     "  execute "silent! cgetfile " . s:tempfile
-""     "else
-""     "  exec "silent! cfile " . s:tempfile
-""     "endif
-""     ""endif
-"" 
-""     ""call delete(s:tempfile)
-""   endfunc
-"" 
-""   cwindow
-""   "botright copen
-"" endfunction
