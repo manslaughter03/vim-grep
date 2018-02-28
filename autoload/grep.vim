@@ -67,7 +67,7 @@ function! grep#run(pattern, ...)
   let l:cmd      = printf(
         \ "%s %s %s %s", 
         \ g:grep_default_bin,
-        \ g:grep_default_options,
+        \ join(g:grep_default_options, " "),
         \ a:pattern, 
         \ l:filenames
         \ )

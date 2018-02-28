@@ -6,7 +6,11 @@
 " Last Change:  2018-02-20
 
 if !exists("g:grep_default_options")
-    let g:grep_default_options = "--with-filename --line-number"
+    let g:grep_default_options = [
+          \ "--with-filename",
+          \ "--line-number",
+          \ "--binary-files=without-match"
+          \ ]
 endif
 
 if filereadable(expand('<sfile>:p:h:h') . "/VERSION")
