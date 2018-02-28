@@ -95,7 +95,7 @@ function! grep#run_recursive(pattern, ...)
         \ join(map(l:exclude_path, {val -> ' ! -path ' . v:val})), 
         \ join(map(l:include_path, {val -> ' -path "' . v:val . '"'})),
         \ g:grep_default_bin,
-        \ g:grep_default_options,
+        \ join(g:grep_default_options, " "),
         \ a:pattern
         \ )
 
@@ -109,7 +109,7 @@ endfunction
 function! grep#run_async_job(pattern, cmd)
   let s:pattern  = a:pattern
   let l:cmd      = a:cmd
-"  echo "cmd: " . l:cmd
+  "echo "cmd: " . l:cmd
 
   exec "silent! cadde \"Search pattern: " . a:pattern . "\""
 
@@ -131,6 +131,28 @@ function! grep#run_async_job(pattern, cmd)
   endfunc
 
   " Exec job
-  let l:job = job_start(l:cmd, l:job_options)
+  let g:grep_plugin_current_job = job_start(l:cmd, l:job_options)
+
+endfunction
+
+" Abort current job
+function! grep#abort_job()
+
+  if empty(g:grep_plugin_current_job)
+    echo "No current job to abort."
+  else
+    call job_stop(g:grep_plugin_current_job)
+  endif
+
+endfunction
+
+" Display info of current job
+function! grep#info_job()
+
+  if empty(g:grep_plugin_current_job)
+    echo "No current job"
+  else
+    echo job_info(g:grep_plugin_current_job)
+  endif
 
 endfunction

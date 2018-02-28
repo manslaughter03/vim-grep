@@ -13,6 +13,8 @@ if !exists("g:grep_default_options")
           \ ]
 endif
 
+let g:grep_plugin_current_job = {}
+
 if filereadable(expand('<sfile>:p:h:h') . "/VERSION")
   let g:grep_plugin_version = readfile(expand('<sfile>:p:h:h') . "/VERSION")[0]
 endif
@@ -56,3 +58,9 @@ command! -complete=file GrepPrompt
 
 command! -complete=file RgrepPrompt
       \ call setqflist([]) | call grep#run_recursive_prompt_args()
+
+command! -nargs=0 GrepAbort
+      \ call grep#abort_job()
+
+command! -nargs=0 GrepInfo
+      \ call grep#info_job()
