@@ -16,8 +16,9 @@ run:
 
 release:
 	@echo INFO Release source archive
-	@tar -cvf $(IMAGE_NAME).tar.gz .
+	mkdir -p ./dist
+	tar -cvf dist/$(IMAGE_NAME).tar.gz .
 
 clean:
 	@echo INFO Clean archive
-	rm $(IMAGE_NAME).tar.gz
+	rm -r ./dist
