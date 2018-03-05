@@ -30,8 +30,17 @@ window.
 ------------------------------------------------------------------------------------------------
 2.1. Global Commands                                                         *GrepGlobalCommands*
 
-:Grep [<pattern>] [<filename>]                                                              *:Grep*
+:Grep [<pattern>] [<filename>]                                                            *:Grep*
   Run grep in async job. If no <filename> define we use the current file.
+
+:Egrep [<pattern>] [<filename>]                                                          *:Egrep*
+  Same as grep with options '--extended-regexp'.
+
+:Fgrep [<pattern>] [<filename>]                                                          *:Fgrep*
+  Same as grep with options '--fixed-strings'.
+
+:Pgrep [<pattern>] [<filename>]                                                          *:Pgrep*
+  Same as grep with options '--perl-regexp'.
 
 :Rgrep <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>]       *:Rgrep*
   Run recursive grep in async job. If no <directory> are given then the $PWD is use.

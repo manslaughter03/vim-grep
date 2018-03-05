@@ -27,40 +27,64 @@ if !exists("g:grep_default_bin")
     endif
 endif
 
-command! -nargs=+ -complete=file Grep
-      \ call setqflist([]) | call grep#run(<f-args>)
+command! -nargs=* -complete=file Grep
+      \ call setqflist([]) | call grep#run([], <f-args>)
 
-command! -nargs=+ -complete=file Egrep
-      \ call setqflist([]) | call grep#run(<f-args>, ["--extended-regexp"])
+command! -nargs=* -complete=file Egrep
+      \ call setqflist([]) | call grep#run(["--extended-regexp"], <f-args>)
 
-command! -nargs=+ -complete=file Fgrep
-      \ call setqflist([]) | call grep#run(<f-args>, ["--fixed-strings"])
+command! -nargs=* -complete=file Fgrep
+      \ call setqflist([]) | call grep#run(["--fixed-strings"], <f-args>)
 
-command! -nargs=+ -complete=file Ggrep
-      \ call setqflist([]) | call grep#run(<f-args>, ["--basic-regexp"])
+command! -nargs=* -complete=file Pgrep
+      \ call setqflist([]) | call grep#run(["--perl-regexp"], <f-args>)
 
-command! -nargs=+ -complete=file Pgrep
-      \ call setqflist([]) | call grep#run(<f-args>, ["--perl-regexp"])
+command! -nargs=* -complete=file Rgrep
+      \ call setqflist([]) | call grep#run_recursive([], <f-args>)
 
-command! -nargs=+ -complete=file Rgrep
-      \ call setqflist([]) | call grep#run_recursive(<f-args>)
+command! -nargs=* -complete=file Regrep
+      \ call setqflist([]) | call grep#run_recursive(["--extended-regexp"], <f-args>)
 
-command! -nargs=+ -complete=file GrepAdd
+command! -nargs=* -complete=file Rfgrep
+      \ call setqflist([]) | call grep#run_recrusive(["--fixed-strings"], <f-args>)
+
+command! -nargs=* -complete=file Rpgrep
+      \ call setqflist([]) | call grep#run_recrusive(["--perl-regexp"], <f-args>)
+
+command! -nargs=* -complete=file GrepAdd
       \ call grep#run(<f-args>)
 
-command! -nargs=+ -complete=file RgrepAdd
+command! -nargs=* -complete=file EgrepAdd
+      \ call grep#run(<f-args>, ["--extended-regexp"])
+
+command! -nargs=* -complete=file FgrepAdd
+      \ call grep#run(<f-args>, ["--fixed-strings"])
+
+command! -nargs=* -complete=file PgrepAdd
+      \ call grep#run(<f-args>, ["--perl-regexp"])
+
+command! -nargs=* -complete=file RgrepAdd
       \ call grep#run_recursive(<f-args>)
 
-command! -nargs=1 GrepBuffer
+command! -nargs=* -complete=file RegrepAdd
+      \ call grep#run_recursive(["--extended-regexp"], <f-args>)
+
+command! -nargs=* -complete=file RfgrepAdd
+      \ call grep#run_recursive(["--fixed-strings"], <f-args>)
+
+command! -nargs=* -complete=file RpgrepAdd
+      \ call grep#run_recursive(["--perl-regexp"], <f-args>)
+
+command! -nargs=* GrepBuffer
       \ call setqflist([]) | call grep#run_buffer(<f-args>)
 
-command! -nargs=1 GrepBufferAdd
+command! -nargs=* GrepBufferAdd
       \ call grep#run_buffer(<f-args>)
 
-command! -nargs=1 Bgrep
+command! -nargs=* Bgrep
       \ call setqflist([]) | call grep#run_buffer(<f-args>)
 
-command! -nargs=1 BgrepAdd
+command! -nargs=* BgrepAdd
       \ call grep#run_buffer(<f-args>)
 
 command! -complete=file GrepPrompt

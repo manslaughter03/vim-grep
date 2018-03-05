@@ -33,10 +33,11 @@ function! grep#run_recursive_prompt_args()
 
 endfunction
 
-function! grep#run_buffer(pattern)
+function! grep#run_buffer(...)
   
   " Get a list of all the buffer names
   let last_bufno = bufnr("$")
+  let l:pattern  = a:0 > 0 ? a:1 : expand("<cword>")
 
   let i = 1
   let l:filenames = []
@@ -56,18 +57,15 @@ function! grep#run_buffer(pattern)
   endwhile
 
   " apply js equivalent
-  call call('grep#run', [a:pattern] + l:filenames)
+  call call('grep#run', [l:pattern] + l:filenames)
 endfunction
 
 " Run simple grep with pattern and options as parameters
-function! grep#run(...)
+function! grep#run(options, ...)
 
-  let l:pattern  = a:0 > 0 ? a:1 : expand("<cword>")
+  let l:pattern = a:0 > 0 ? a:1 : expand("<cword>")
   let l:filename = expand("%")
-  let l:grep_options = g:grep_default_options
-  if a:0 > 1
-    let l:grep_options += a:2
-  endif
+  let l:grep_options = copy(g:grep_default_options) + a:options
 
   " Generate commande grep
   let l:cmd      = printf(
@@ -83,10 +81,11 @@ function! grep#run(...)
 endfunction
 
 " Run recursive grep with pattern and options as parameters
-function! grep#run_recursive( ...)
+function! grep#run_recursive(options, ...)
 
   " init var options
   let l:recursive = 1
+  let l:grep_options = copy(g:grep_default_options) + a:options
   let l:pattern = a:0 > 0 ? a:1 : expand("<cword>")
   let l:directory = a:0 > 1 ? a:2 : $PWD
   let l:file_pattern = a:0 > 2 ? a:3 : "*"
@@ -101,8 +100,8 @@ function! grep#run_recursive( ...)
         \ join(map(l:exclude_path, {val -> ' ! -path ' . v:val})), 
         \ join(map(l:include_path, {val -> ' -path "' . v:val . '"'})),
         \ g:grep_default_bin,
-        \ join(g:grep_default_options, " "),
-        \ l:pattern
+        \ l:pattern,
+        \ join(l:grep_options, " ")
         \ )
 
   call setqflist([])
@@ -115,7 +114,7 @@ endfunction
 function! grep#run_async_job(pattern, cmd)
   let s:pattern  = a:pattern
   let l:cmd      = a:cmd
-  "echo "cmd: " . l:cmd
+  echo "cmd: " . l:cmd
 
   exec "silent! cadde \"Search pattern: " . a:pattern . "\""
 
@@ -134,7 +133,7 @@ function! grep#run_async_job(pattern, cmd)
 
   " Exit Callback
   func! HandleExit(job, exit_status)
-    echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
+    "echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
   endfunc
 
   " Exec job
