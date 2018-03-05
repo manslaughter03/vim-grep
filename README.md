@@ -15,3 +15,82 @@ Install with packs vim 8 [help](http://vimhelp.appspot.com/repeat.txt.html#packa
 ```shell
 git clone git_url/banks/vim-grep ~/.vim/pack/plugins/start/vim-grep
 ```
+
+## Example of usage
+
+- Grep on current buffer :
+
+```
+:Grep bool
+```
+
+- Use vim-grep api from vimscript :
+
+```
+call grep#run("test")
+```
+
+```
+call grep#run_recursive("python", "/usr/share")
+```
+
+## Features
+
+* Grep current buffer/or specify filename
+
+* Grep recursive on a target directory (default current dir), can filter on filename, exclude pattern (ex: ./dist/\*.js)
+
+* Grep on each open buffer (:GrepBuffer)
+
+* Simple and recursive grep with prompt config
+
+* GrepAdd allow to add result in current quickfix list. Also available for Rgrep, GrepBuffer.
+
+## Todos
+
+Features api :
+
+- :Grep          [X]
+- :GrepAdd       [X]
+- :Rgrep         [X]
+- :RgrepAdd      [X]
+- :GrepBuffer    [X]
+- :GrepBufferAdd [X]
+- :Bgrep         [X]
+- :BgrepAdd      [X]
+- :GrepArgs      [ ]
+- :GrepArgsAdd   [ ]
+- :Fgrep         [X]
+- :FgrepAdd      [ ]
+- :Rfgrep        [ ]
+- :RfgrepAdd     [ ]
+- :Egrep         [X]
+- :EgrepAdd      [ ]
+- :Regrep        [ ]
+- :RegrepAdd     [ ]
+- :Agrep         [ ]
+- :AgrepAdd      [ ]
+- :Ragrep        [ ]
+- :RagrepAdd     [ ]
+
+## Idea
+
+- global var shell escape quote ?
+
+- add "-e" options for pattern search in grep cmd
+
+- Replace GrepPrompt and RgrepPrompt command by the default case when Grep and Rgrep without args ? Pattern default value from expand("<cword>") ?
+
+- case sensitive/insensitive
+
+- :ResultListFilter ?
+
+- :ResultListDo ?
+
+- :Replace ? :ReplaceUndo ?
+
+## Sources
+
+- [Quickfix list](http://vimdoc.sourceforge.net/htmldoc/quickfix.html)
+
+- [Vim-grep](https://github.com/vim-scripts/grep.vim)

@@ -13,8 +13,6 @@ if !exists("g:grep_default_options")
           \ ]
 endif
 
-let g:grep_plugin_current_job = {}
-
 if filereadable(expand('<sfile>:p:h:h') . "/VERSION")
   let g:grep_plugin_version = readfile(expand('<sfile>:p:h:h') . "/VERSION")[0]
 endif
@@ -31,6 +29,18 @@ endif
 
 command! -nargs=+ -complete=file Grep
       \ call setqflist([]) | call grep#run(<f-args>)
+
+command! -nargs=+ -complete=file Egrep
+      \ call setqflist([]) | call grep#run(<f-args>, ["--extended-regexp"])
+
+command! -nargs=+ -complete=file Fgrep
+      \ call setqflist([]) | call grep#run(<f-args>, ["--fixed-strings"])
+
+command! -nargs=+ -complete=file Ggrep
+      \ call setqflist([]) | call grep#run(<f-args>, ["--basic-regexp"])
+
+command! -nargs=+ -complete=file Pgrep
+      \ call setqflist([]) | call grep#run(<f-args>, ["--perl-regexp"])
 
 command! -nargs=+ -complete=file Rgrep
       \ call setqflist([]) | call grep#run_recursive(<f-args>)

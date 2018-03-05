@@ -2,7 +2,7 @@ IMAGE_NAME=$(shell basename $(PWD))
 TAG=$(shell cat VERSION)
 NAMESPACE=$(USER)
 
-.PHONY: build run release install clean
+.PHONY: build run release install clean test
 
 default: build
 
@@ -22,3 +22,12 @@ release:
 clean:
 	@echo INFO Clean archive
 	rm -r ./dist
+
+install:
+	@echo INFO Install $(IMAGE_NAME)
+	mkdir -p $(HOME)/.vim/packs/plugins/start/
+	cp -R $(PWD) $(HOME)/.vim/packs/plugins/start/
+
+test:
+	@echo INFO Test $(IMAGE_NAME)
+	vim -c "redir > vim.output | silent call testing#test() | redir END | q!" 

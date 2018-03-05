@@ -30,7 +30,7 @@ window.
 ------------------------------------------------------------------------------------------------
 2.1. Global Commands                                                         *GrepGlobalCommands*
 
-:Grep <pattern> [<filename>]                                                              *:Grep*
+:Grep [<pattern>] [<filename>]                                                              *:Grep*
   Run grep in async job. If no <filename> define we use the current file.
 
 :Rgrep <pattern> [<directory>]  [<file_pattern>] [<exclude_path>] [<include_path>]       *:Rgrep*
@@ -61,3 +61,9 @@ window.
 
 :RgrepPrompt                                                                       *:RgrepPrompt*
   Same as :Rgrep and prompt arguments before running a recursive grep command.
+
+:GrepAbort                                                                           *:GrepAbort*
+  Abort current job.
+
+:GrepInfo                                                                             *:GrepInfo* 
+  Get info from current job.

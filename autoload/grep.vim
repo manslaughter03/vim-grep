@@ -1,4 +1,4 @@
-" grep
+" grep plugin
 " Description:  
 " Language:     
 " Maintainer:   manslaughter <manslaughter03@gmail.com>
@@ -8,6 +8,7 @@
 if exists("g:loaded_grep_autoload")
     finish
 endif
+
 let g:loaded_grep_autoload = 1
 
 function! grep#version()
@@ -59,48 +60,53 @@ function! grep#run_buffer(pattern)
 endfunction
 
 " Run simple grep with pattern and options as parameters
-function! grep#run(pattern, ...)
+function! grep#run(...)
 
-  let l:filenames  = a:0 > 0 ? join(a:000, " ") : expand("%")
+  let l:pattern  = a:0 > 0 ? a:1 : expand("<cword>")
+  let l:filename = expand("%")
+  let l:grep_options = g:grep_default_options
+  if a:0 > 1
+    let l:grep_options += a:2
+  endif
 
   " Generate commande grep
   let l:cmd      = printf(
-        \ "%s %s %s %s", 
+        \ "%s %s -e %s %s", 
         \ g:grep_default_bin,
-        \ join(g:grep_default_options, " "),
-        \ a:pattern, 
-        \ l:filenames
+        \ join(l:grep_options, " "),
+        \ l:pattern, 
+        \ l:filename
         \ )
 
-  call grep#run_async_job(a:pattern, l:cmd)
+  call grep#run_async_job(l:pattern, l:cmd)
 
 endfunction
 
 " Run recursive grep with pattern and options as parameters
-function! grep#run_recursive(pattern, ...)
+function! grep#run_recursive( ...)
 
   " init var options
   let l:recursive = 1
-  let l:directory = a:0 > 0 ? a:1 : $PWD
-  let l:file_pattern = a:0 > 1 ? a:2 : "*"
-  let l:exclude_path = a:0 > 2 ? split(a:3, ',') : []
-  let l:include_path = a:0 > 3 ? split(a:4, ',') : []
-  let l:pattern = a:pattern
+  let l:pattern = a:0 > 0 ? a:1 : expand("<cword>")
+  let l:directory = a:0 > 1 ? a:2 : $PWD
+  let l:file_pattern = a:0 > 2 ? a:3 : "*"
+  let l:exclude_path = a:0 > 3 ? split(a:4, ',') : []
+  let l:include_path = a:0 > 4 ? split(a:5, ',') : []
 
   " Generate command find + grep
   let l:cmd      = printf(
-        \ "find %s -type f -name %s%s%s -exec %s %s %s {} \\;",
+        \ "find %s -type f -name %s%s%s -exec %s -e %s %s {} \\;",
         \ l:directory,
         \ l:file_pattern,
         \ join(map(l:exclude_path, {val -> ' ! -path ' . v:val})), 
         \ join(map(l:include_path, {val -> ' -path "' . v:val . '"'})),
         \ g:grep_default_bin,
         \ join(g:grep_default_options, " "),
-        \ a:pattern
+        \ l:pattern
         \ )
 
   call setqflist([])
-  call grep#run_async_job(a:pattern, l:cmd)
+  call grep#run_async_job(l:pattern, l:cmd)
 
 endfunction
 
@@ -121,7 +127,8 @@ function! grep#run_async_job(pattern, cmd)
 
   " Output callback
   func! HandleOut(channel, message)
-    exec "silent! cadde a:message"
+    exec "cadde a:message"
+"    exec "match Search  /" . s:pattern . "/"
     cwindow
   endfunc
 
