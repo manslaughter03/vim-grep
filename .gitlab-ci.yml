@@ -9,5 +9,4 @@ build:
   stage: build
   script:
     - docker build -t $IMAGE_TAG .
-    - docker run $IMAGE_TAG make test
       #    - docker push $IMAGE_TAG
