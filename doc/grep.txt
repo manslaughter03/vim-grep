@@ -13,10 +13,12 @@
 =================================================================================================
 CONTENTS                                                                          *Grep-contents*
 
-    1.Intro.................................|Grep|
-    2.Functionality provided................|GrepFunctionality|
+    1. Intro................................|Grep|
+    2. Functionality provided...............|GrepFunctionality|
         2.1 Global commands.................|GrepGlobalCommands|
-    3.Options...............................|GrepOptions|
+        2.2 Api functions...................|GrepApiFunctions|
+    3. Installation.........................|GrepInstallation|
+    4. Options..............................|GrepOptions|
 
 =================================================================================================
 1. Intro                                                                                   *Grep*
@@ -74,5 +76,31 @@ window.
 :GrepAbort                                                                           *:GrepAbort*
   Abort current job.
 
-:GrepInfo                                                                             *:GrepInfo* 
+:GrepInfo                                                                             *:GrepInfo*
   Get info from current job.
+
+-------------------------------------------------------------------------------------------------
+2.1. Api functions                                                             *GrepApiFunctions*
+
+grep#run_buffer(<pattern>)                                                    *grep#run_buffer()*
+  Run grep command on every open buffers. 
+  Arg <pattern> must be a string, this argument is optional. The default value
+  would be the return of expand("<cword>").
+
+grep#run(options, <pattern>)                                                         *grep#run()*
+  Run grep command on current file (return of expand("%")).
+  The options argument must be an array.
+  Arg <pattern> must be a string, this argument is optional. The default value
+  would be the return of expand("<cword>").
+
+grep#run_recursive(options, ...)                                           *grep#run_recursive()*
+  Run recursive grep.
+
+grep#run_async_job(pattern, cmd)                                           *grep#run_async_job()*
+  Run async job.
+
+=================================================================================================
+3. Installation                                                                *GrepInstallation*
+
+=================================================================================================
+4. Options                                                                          *GrepOptions*
