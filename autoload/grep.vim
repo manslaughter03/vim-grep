@@ -5,25 +5,30 @@
 " Version:      0.0.1
 " Last Change:  2018-02-18
 
+" check if the script is already load
 if exists("g:loaded_grep_autoload")
     finish
 endif
 
+" set the global variable
 let g:loaded_grep_autoload = 1
 
+" return the current version
 function! grep#version()
     return g:grep_plugin_version
 endfunction
 
+" run simple grep with input options
 function! grep#run_prompt_args()
 
-  let l:pattern = input("Enter pattern: ")
+  let l:pattern = input("Enter pattern: ", expand("<cword>"))
   let l:filename = input("Enter filename: ", expand("%:p"))
   
   call grep#run(l:pattern)
 
 endfunction
 
+" run simple grep recursive with input options
 function! grep#run_recursive_prompt_args()
 
   let l:pattern = input("Enter pattern: ")
@@ -33,6 +38,7 @@ function! grep#run_recursive_prompt_args()
 
 endfunction
 
+" run grep on every buffer open
 function! grep#run_buffer(...)
   
   " Get a list of all the buffer names
