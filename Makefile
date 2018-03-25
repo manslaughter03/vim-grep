@@ -16,17 +16,18 @@ run:
 
 release:
 	@echo INFO Release source archive
-	mkdir -p ./dist
-	tar -cvf dist/$(IMAGE_NAME).tar.gz .
+	@mkdir -p ./dist
+	@tar --exclude="./dist" --exclude="./.git" -cvf dist/$(IMAGE_NAME).tar.gz .
+	@echo INFO dist/$(IMAGE_NAME).tar.gz created.
 
 clean:
 	@echo INFO Clean archive
-	rm -r ./dist
+	@rm -r ./dist
 
 install:
 	@echo INFO Install $(IMAGE_NAME)
-	mkdir -p $(HOME)/.vim/packs/plugins/start/
-	cp -R $(PWD) $(HOME)/.vim/packs/plugins/start/
+	@mkdir -p $(HOME)/.vim/packs/plugins/start/
+	@cp -R $(PWD) $(HOME)/.vim/packs/plugins/start/
 
 test:
 	@echo INFO Test $(IMAGE_NAME)

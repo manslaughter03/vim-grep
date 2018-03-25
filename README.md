@@ -2,7 +2,7 @@
 
 Vim plugin allow to run grep command from vim. Result is display in the quickfix window.
 
-## Install
+## Install :
 
 Install with pathogen.
 
@@ -16,7 +16,7 @@ Install with packs vim 8 [help](http://vimhelp.appspot.com/repeat.txt.html#packa
 git clone git_url/banks/vim-grep ~/.vim/pack/plugins/start/vim-grep
 ```
 
-## Example of usage
+## Example of usage :
 
 - Grep on current buffer :
 
@@ -30,13 +30,15 @@ git clone git_url/banks/vim-grep ~/.vim/pack/plugins/start/vim-grep
 call grep#run("test")
 ```
 
+Call recursive grep function :
+
 ```
 call grep#run_recursive("python", "/usr/share")
 ```
 
-## Features
+## Features :
 
-* Grep current buffer/or specify filename
+* Run grep command on current buffer/or specify filename
 
 * Grep recursive on a target directory (default current dir), can filter on filename, exclude pattern (ex: ./dist/\*.js)
 
@@ -46,7 +48,7 @@ call grep#run_recursive("python", "/usr/share")
 
 * GrepAdd allow to add result in current quickfix list. Also available for Rgrep, GrepBuffer.
 
-## Todos
+## Todos :
 
 Features api :
 
@@ -61,13 +63,13 @@ Features api :
 - :GrepArgs      [ ]
 - :GrepArgsAdd   [ ]
 - :Fgrep         [X]
-- :FgrepAdd      [ ]
-- :Rfgrep        [ ]
-- :RfgrepAdd     [ ]
+- :FgrepAdd      [X]
+- :Rfgrep        [X]
+- :RfgrepAdd     [X]
 - :Egrep         [X]
-- :EgrepAdd      [ ]
-- :Regrep        [ ]
-- :RegrepAdd     [ ]
+- :EgrepAdd      [X]
+- :Regrep        [X]
+- :RegrepAdd     [X]
 - :Agrep         [ ]
 - :AgrepAdd      [ ]
 - :Ragrep        [ ]
@@ -76,8 +78,6 @@ Features api :
 ## Idea
 
 - global var shell escape quote ?
-
-- add "-e" options for pattern search in grep cmd
 
 - Replace GrepPrompt and RgrepPrompt command by the default case when Grep and Rgrep without args ? Pattern default value from expand("<cword>") ?
 

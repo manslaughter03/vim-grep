@@ -102,5 +102,18 @@ grep#run_async_job(pattern, cmd)                                           *grep
 =================================================================================================
 3. Installation                                                                *GrepInstallation*
 
+  You can install this plugin with pathogen or with the native package manager of vim.
+  Install with pathogen, you can clone the repository or download the lastest release
+  into the bundle ($HOME/.vim/bundle/vim-grep). In the same way with package manager 
+  into the directory ($HOME/.vim/packs/xxx/start/vim-grep).
+  You have to run :helptags directory_of_doc to generate tags.
+
 =================================================================================================
 4. Options                                                                          *GrepOptions*
+
+  The script provides the following options that can set the behaviour. You must set from
+  your vimrc.
+
+|'g:grep_default_options'|        Set grep command options.
+
+|'g:grep_default_bin'|            Set grep command bin.

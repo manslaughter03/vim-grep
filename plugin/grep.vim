@@ -5,6 +5,17 @@
 " Version:      0.0.1
 " Last Change:  2018-02-20
 
+" check if the script is already load
+if exists("g:loaded_grep_plugin")
+    finish
+endif
+
+if v:version < 800
+  echoerr "vim-grep: this plugin requires vim >= 800. GO GET IT"
+endif
+
+let g:loaded_grep_plugin = 1
+
 if !exists("g:grep_default_options")
     let g:grep_default_options = [
           \ "--with-filename",
