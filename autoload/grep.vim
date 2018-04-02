@@ -63,7 +63,7 @@ function! grep#run_buffer(...)
   endwhile
 
   " apply js equivalent
-  call call('grep#run', [l:pattern] + l:filenames)
+  call call('grep#run', [[], l:pattern] + l:filenames)
 endfunction
 
 " Run simple grep with pattern and options as parameters
@@ -120,7 +120,6 @@ endfunction
 function! grep#run_async_job(pattern, cmd)
   let s:pattern  = a:pattern
   let l:cmd      = a:cmd
-  echo "cmd: " . l:cmd
 
   exec "silent! cadde \"Search pattern: " . a:pattern . "\""
 
@@ -139,7 +138,7 @@ function! grep#run_async_job(pattern, cmd)
 
   " Exit Callback
   func! HandleExit(job, exit_status)
-    "echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
+    echo printf("job: %s, exit_status: %s", a:job, a:exit_status)
   endfunc
 
   " Exec job

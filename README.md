@@ -1,19 +1,20 @@
 # Vim-grep
 
-Vim plugin allow to run grep command from vim. Result is display in the quickfix window.
+Vim plugin allow to search for pattern with grep command from vim in async job (available only on version 8+ of vim). Result is display in the quickfix window.
+This plugin need grep and find utilities.
 
 ## Install :
 
-Install with pathogen.
+Install with [pathogen](https://github.com/tpope/vim-pathogen).
 
 ```shell
-git clone git_url/banks/vim-grep ~/.vim/bundle/vim-grep
+git clone https://github.com/manslaughter03/vim-grep ~/.vim/bundle/vim-grep
 ```
 
 Install with packs vim 8 [help](http://vimhelp.appspot.com/repeat.txt.html#packages).
 
 ```shell
-git clone git_url/banks/vim-grep ~/.vim/pack/plugins/start/vim-grep
+git clone https://github.com/manslaughter03/vim-grep  ~/.vim/pack/plugins/start/vim-grep
 ```
 
 ## Example of usage :
@@ -50,30 +51,32 @@ call grep#run_recursive("python", "/usr/share")
 
 ## Todos :
 
-Features api :
-
-- :Grep          [X]
-- :GrepAdd       [X]
-- :Rgrep         [X]
-- :RgrepAdd      [X]
-- :GrepBuffer    [X]
-- :GrepBufferAdd [X]
-- :Bgrep         [X]
-- :BgrepAdd      [X]
-- :GrepArgs      [ ]
-- :GrepArgsAdd   [ ]
-- :Fgrep         [X]
-- :FgrepAdd      [X]
-- :Rfgrep        [X]
-- :RfgrepAdd     [X]
-- :Egrep         [X]
-- :EgrepAdd      [X]
-- :Regrep        [X]
-- :RegrepAdd     [X]
-- :Agrep         [ ]
-- :AgrepAdd      [ ]
-- :Ragrep        [ ]
-- :RagrepAdd     [ ]
+- :Grep           [x]
+- :Egrep          [x]
+- :Fgrep          [x]
+- :Pgrep          [x]
+- :Rgrep          [x]
+- :Regrep         [x]
+- :Rfgrep         [x]
+- :Rpgrep         [x]
+- :GrepAdd        [x]
+- :EgrepAdd       [x]
+- :FgrepAdd       [x]
+- :PgrepAdd       [x]
+- :RgrepAdd       [x]
+- :RegrepAdd      [x]
+- :RfgrepAdd      [x]
+- :RpgrepAdd      [x]
+- :GrepBuffer     [x]
+- :GrepBufferAdd  [x]
+- :Bgrep          [x]
+- :BgrepAdd       [x]
+- :GrepPrompt     [x]
+- :RgrepPrompt    [x]
+- :GrepAbort      [x]
+- :GrepInfo       [x]
+- :GrepArgs       [ ]
+- :GrepArgsAdd    [ ]
 
 ## Idea
 
