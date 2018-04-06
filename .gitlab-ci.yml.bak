@@ -1,0 +1,12 @@
+image: docker:git
+services:
+  - docker:dind
+
+variables:
+  IMAGE_TAG: registry.pandajs.com:5000/$CI_COMMIT_REF_NAME
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_TAG .
+      #    - docker push $IMAGE_TAG

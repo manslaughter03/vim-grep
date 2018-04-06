@@ -1,7 +1,7 @@
 image: haron/vim
 
 before_script:
-  - git clone https://github.com/syngan/vim-lint /tmp/vim-lint
+  - git clone https://github.com/syngan/vim-vimlint /tmp/vim-vimlint
   - git clone https://github.com/ynkdir/vim-vimlparser /tmp/vim-vimlparser
 
 test:
