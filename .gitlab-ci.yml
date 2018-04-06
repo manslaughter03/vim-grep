@@ -1,12 +1,8 @@
-image: docker:git
-services:
-  - docker:dind
+image: haron/vim
 
-variables:
-  IMAGE_TAG: registry.pandajs.com:5000/$CI_COMMIT_REF_NAME
+before_script:
+  - git clone https://github.com/syngan/vim-lint /tmp/vim-lint
+  - git clone https://github.com/ynkdir/vim-vimlparser /tmp/vim-vimlparser
 
-build:
-  stage: build
-  script:
-    - docker build -t $IMAGE_TAG .
-      #    - docker push $IMAGE_TAG
+script:
+  - sh /tmp/vim-vimlint/bin/vimlint.sh -l /tmp/vim-vimlint -p /tmp/vim-vimlparser -v autoload
