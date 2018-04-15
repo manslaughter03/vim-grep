@@ -22,7 +22,6 @@ endfunction
 function! grep#run_prompt_args()
 
   let l:pattern = input("Enter pattern: ", expand("<cword>"))
-  let l:filename = input("Enter filename: ", expand("%:p"))
   
   call grep#run(l:pattern)
 
@@ -95,16 +94,16 @@ function! grep#run_recursive(options, ...)
   let l:pattern = a:0 > 0 ? a:1 : expand("<cword>")
   let l:directory = a:0 > 1 ? a:2 : $PWD
   let l:file_pattern = a:0 > 2 ? a:3 : "*"
-  let l:exclude_path = a:0 > 3 ? split(a:4, ',') : []
-  let l:include_path = a:0 > 4 ? split(a:5, ',') : []
+  let l:excl = a:0 > 3 ? split(a:4, ',') : []
+  let l:incl = a:0 > 4 ? split(a:5, ',') : []
 
   " Generate command find + grep
   let l:cmd      = printf(
         \ "find %s -type f -name %s%s%s -exec %s -e %s %s {} \\;",
         \ l:directory,
         \ l:file_pattern,
-        \ join(map(l:exclude_path, {val -> ' ! -path ' . v:val})), 
-        \ join(map(l:include_path, {val -> ' -path "' . v:val . '"'})),
+        \ join(map(l:excl, {v -> ' ! -path ' . v:v})),
+        \ join(map(l:incl, {v -> ' -path "' . v:v . '"'})),
         \ g:grep_default_bin,
         \ l:pattern,
         \ join(l:grep_options, " ")
