@@ -132,7 +132,7 @@ function! grep#run_async_job(pattern, cmd)
   func! HandleOut(channel, message)
     exec "cadde a:message"
 "    exec "match Search  /" . s:pattern . "/"
-    cwindow
+    botright cwindow
   endfunc
 
   " Exit Callback
